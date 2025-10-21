@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קורס n8n מקיף - מהבסיס ועד AI Agents</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts - Heebo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            font-family: 'Heebo', sans-serif;
+        }
+        
+        :root {
+            --n8n-orange: #FF6D5A;
+            --n8n-dark: #1A1A1A;
+            --n8n-light: #F8F9FA;
+            --accent-purple: #9333EA;
+            --success-green: #10B981;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--n8n-dark) 0%, #2d2d2d 100%);
+        }
+        
+        .category-gradient-1 {
+            background: linear-gradient(135deg, #fef3f2 0%, #ffffff 100%);
+        }
+        
+        .category-gradient-2 {
+            background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+        }
+        
+        .category-gradient-3 {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+        }
+        
+        .category-gradient-4 {
+            background: linear-gradient(135deg, #fef3c7 0%, #ffffff 100%);
+        }
+        
+        .category-gradient-5 {
+            background: linear-gradient(135deg, #fae8ff 0%, #ffffff 100%);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #000;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .module-card {
+            transition: all 0.3s ease;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .completion-checkbox {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .completion-checkbox:hover {
+            transform: scale(1.1);
+        }
+        
+        .completion-checkbox.completed {
+            color: var(--success-green);
+        }
+        
+        .toc-link {
+            transition: all 0.2s ease;
+        }
+        
+        .toc-link:hover, .toc-link.active {
+            background: #fff5f3;
+            border-right: 3px solid var(--n8n-orange);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .sticky-toc {
+            position: sticky;
+            top: 20px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+        
+        /* Custom scrollbar */
+        .sticky-toc::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .sticky-toc::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .sticky-toc::-webkit-scrollbar-thumb {
+            background: var(--n8n-orange);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="hero-gradient text-white py-16 md:py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">קורס n8n מקיף</h1>
+            <p class="text-xl md:text-2xl mb-8 text-gray-300">מהבסיס ועד AI Agents - נלמד לבנות אוטומציות מתקדמות</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#module-01" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full font-semibold transition shadow-lg">
+                    התחל ללמוד
+                </a>
+                <a href="https://n8n.partnerlinks.io/AI22" target="_blank" class="bg-white text-gray-900 hover:bg-gray-100 px-8 py-3 rounded-full font-semibold transition shadow-lg">
+                    הרשמה ל-n8n
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            
+            <!-- Table of Contents - Sidebar -->
+            <aside class="lg:col-span-1">
+                <div class="sticky-toc bg-white rounded-2xl shadow-xl p-6">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold mb-2">תוכן הקורס</h3>
+                        <div class="flex items-center gap-2 text-sm text-gray-600">
+                            <span class="font-bold text-green-600" id="completed-count">0</span>
+                            <span>/ 27 מודולים הושלמו</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Category 1 -->
+                    <div class="mb-6">
+                        <h4 class="font-bold text-gray-800 mb-3 text-sm">יסודות ומבוא (1-7)</h4>
+                        <ul class="space-y-1">
+                            <li><a href="#module-01" class="toc-link block px-3 py-2 rounded text-sm hover:bg-orange-50" data-module="01">1. מבוא ל-n8n</a></li>
+                            <li><a href="#module-02" class="toc-link block px-3 py-2 rounded text-sm" data-module="02">2. פתיחת חשבון</a></li>
+                            <li><a href="#module-03" class="toc-link block px-3 py-2 rounded text-sm" data-module="03">3. פאנל ניהול</a></li>
+                            <li><a href="#module-04" class="toc-link block px-3 py-2 rounded text-sm" data-module="04">4. טמפלייטים</a></li>
+                            <li><a href="#module-05" class="toc-link block px-3 py-2 rounded text-sm" data-module="05">5. סיור בקנבס</a></li>
+                            <li><a href="#module-06" class="toc-link block px-3 py-2 rounded text-sm" data-module="06">6. Assistant AI</a></li>
+                            <li><a href="#module-07" class="toc-link block px-3 py-2 rounded text-sm" data-module="07">7. Sticky Notes</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Category 2 -->
+                    <div class="mb-6">
+                        <h4 class="font-bold text-gray-800 mb-3 text-sm">עבודה עם נתונים (8-15)</h4>
+                        <ul class="space-y-1">
+                            <li><a href="#module-08" class="toc-link block px-3 py-2 rounded text-sm" data-module="08">8. טריגרים</a></li>
+                            <li><a href="#module-09" class="toc-link block px-3 py-2 rounded text-sm" data-module="09">9. טרמינולוגיה</a></li>
+                            <li><a href="#module-10" class="toc-link block px-3 py-2 rounded text-sm" data-module="10">10. Google Sheets</a></li>
+                            <li><a href="#module-11" class="toc-link block px-3 py-2 rounded text-sm" data-module="11">11. JSON ונתונים</a></li>
+                            <li><a href="#module-12" class="toc-link block px-3 py-2 rounded text-sm" data-module="12">12. Expression Editor</a></li>
+                            <li><a href="#module-13" class="toc-link block px-3 py-2 rounded text-sm" data-module="13">13. פיצול נתונים</a></li>
+                            <li><a href="#module-14" class="toc-link block px-3 py-2 rounded text-sm" data-module="14">14. לולאות</a></li>
+                            <li><a href="#module-15" class="toc-link block px-3 py-2 rounded text-sm" data-module="15">15. Merge Nodes</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Category 3 -->
+                    <div class="mb-6">
+                        <h4 class="font-bold text-gray-800 mb-3 text-sm">Webhooks וטפסים (16-18)</h4>
+                        <ul class="space-y-1">
+                            <li><a href="#module-16" class="toc-link block px-3 py-2 rounded text-sm" data-module="16">16. Webhooks</a></li>
+                            <li><a href="#module-17" class="toc-link block px-3 py-2 rounded text-sm" data-module="17">17. שיפור טופס עם AI</a></li>
+                            <li><a href="#module-18" class="toc-link block px-3 py-2 rounded text-sm" data-module="18">18. אינטגרציה מלאה</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Category 4 -->
+                    <div class="mb-6">
+                        <h4 class="font-bold text-gray-800 mb-3 text-sm">טכניקות מתקדמות (19-22)</h4>
+                        <ul class="space-y-1">
+                            <li><a href="#module-19" class="toc-link block px-3 py-2 rounded text-sm" data-module="19">19. Sticky Data</a></li>
+                            <li><a href="#module-20" class="toc-link block px-3 py-2 rounded text-sm" data-module="20">20. פרומפט מתקדם</a></li>
+                            <li><a href="#module-21" class="toc-link block px-3 py-2 rounded text-sm" data-module="21">21. הפעלה LIVE</a></li>
+                            <li><a href="#module-22" class="toc-link block px-3 py-2 rounded text-sm" data-module="22">22. עיצוב מתקדם</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Category 5 -->
+                    <div class="mb-6">
+                        <h4 class="font-bold text-gray-800 mb-3 text-sm">AI Agents (23-27)</h4>
+                        <ul class="space-y-1">
+                            <li><a href="#module-23" class="toc-link block px-3 py-2 rounded text-sm" data-module="23">23. מהו AI Agent</a></li>
+                            <li><a href="#module-24" class="toc-link block px-3 py-2 rounded text-sm" data-module="24">24. Agent ראשון</a></li>
+                            <li><a href="#module-25" class="toc-link block px-3 py-2 rounded text-sm" data-module="25">25. Agent מתקדם</a></li>
+                            <li><a href="#module-26" class="toc-link block px-3 py-2 rounded text-sm" data-module="26">26. דיבאג וטיפול בשגיאות</a></li>
+                            <li><a href="#module-27" class="toc-link block px-3 py-2 rounded text-sm" data-module="27">27. השוואת מודלים</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="lg:col-span-3">
+                
+                <!-- [Content truncated due to length - the full HTML file will be uploaded] -->
+                
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">קורס n8n מקיף - מהבסיס ועד AI Agents</p>
+            <p class="text-gray-400 text-sm">נוצר עם ❤️ על ידי <a href="https://youtube.com/@AIWithHenry" target="_blank" class="text-orange-400 hover:underline">Henry Stauber</a></p>
+            <div class="mt-4">
+                <a href="https://n8n.partnerlinks.io/AI22" target="_blank" class="text-orange-400 hover:underline">הרשמה ל-n8n</a>
+                <span class="mx-2">|</span>
+                <a href="https://taplink.cc/henry.ai" target="_blank" class="text-orange-400 hover:underline">צור קשר</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Progress tracking with localStorage
+        function toggleCompletion(moduleNumber) {
+            const progress = JSON.parse(localStorage.getItem('n8n_progress')) || {};
+            progress[moduleNumber] = !progress[moduleNumber];
+            localStorage.setItem('n8n_progress', JSON.stringify(progress));
+            updateUI(moduleNumber);
+            updateProgressCount();
+        }
+
+        function updateUI(moduleNumber) {
+            const progress = JSON.parse(localStorage.getItem('n8n_progress')) || {};
+            const icon = document.getElementById(`icon-${moduleNumber}`);
+            const checkbox = icon.parentElement;
+            
+            if (progress[moduleNumber]) {
+                icon.className = 'fas fa-check-circle';
+                checkbox.classList.add('completed');
+            } else {
+                icon.className = 'far fa-circle';
+                checkbox.classList.remove('completed');
+            }
+        }
+
+        function updateProgressCount() {
+            const progress = JSON.parse(localStorage.getItem('n8n_progress')) || {};
+            const count = Object.values(progress).filter(v => v === true).length;
+            document.getElementById('completed-count').textContent = count;
+        }
+
+        // Load saved progress on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const progress = JSON.parse(localStorage.getItem('n8n_progress')) || {};
+            Object.keys(progress).forEach(moduleNumber => {
+                if (progress[moduleNumber]) {
+                    updateUI(moduleNumber);
+                }
+            });
+            updateProgressCount();
+        });
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Update active link
+                    document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for active module tracking
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50% 0px -50% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const moduleNumber = entry.target.dataset.module;
+                    document.querySelectorAll('.toc-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.dataset.module === moduleNumber) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.module-card').forEach(module => {
+            observer.observe(module);
+        });
+    </script>
+
+</body>
+</html>
